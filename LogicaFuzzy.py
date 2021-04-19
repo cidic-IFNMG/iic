@@ -50,7 +50,7 @@ class Composicao(ConjuntoNebuloso):
     ret = ""
     for c in self.conjuntos:
       if len(ret) > 1: ret += " OU "
-        ret += c.nome
+      ret += c.nome
     return ret
 
   
@@ -70,7 +70,7 @@ class Conjuncao(ConjuntoNebuloso):
     ret = ""
     for c in self.conjuntos:
       if len(ret) > 1: ret += " E "
-        ret += c.nome
+      ret += c.nome
     return ret
 
 
