@@ -9,7 +9,7 @@ setuptools.setup(
           'matplotlib',
           'numpy',
           'pandas'],
-    packages=['cidic'],	
+    packages=['cidic_iic'],	
     version='0.0.1',
     description='Códigos da disciplina Introdução à IC - Grupo {cidic}',
     long_description='Curso de Introdução à Inteligência Computacional - Grupo de Pesquisa em Ciência de Dados e Inteligência Computacional - {cidic}',
