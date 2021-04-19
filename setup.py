@@ -17,7 +17,7 @@ setuptools.setup(
     author='Petronio Candido L. e Silva',
     author_email='petronio.candido@gmail.com',
     url='https://github.com/cidic-IFNMG/introducao-inteligencia-computacional/',
-    download_url='https://github.com/PYFTS/pyFTS/archive/pkg1.6.tar.gz',
+    download_url='https://github.com/cidic-IFNMG/introducao-inteligencia-computacional/archive/refs/tags/0.0.1.tar.gz',
     keywords=['computational intelligence', 'genetic algorithms', 'fuzzy logic'],
     classifiers=[
         'Programming Language :: Python :: 3',
