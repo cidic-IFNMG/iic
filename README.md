@@ -8,6 +8,6 @@
 
 Biblioteca de códigos desenvolvidos na disciplina Introdução à Inteligência Computacional
 
-$\{ci\partial ic\}$ - Grupo de Pesquisa em Ciência de Dados e Inteligência Computacional
+{ci∂ic} - Grupo de Pesquisa em Ciência de Dados e Inteligência Computacional
 
 IFNMG - Instituto Federal de Educação, Ciência e Tecnologia do Norte de Minas Gerais
