@@ -32,6 +32,46 @@ class ConjuntoFuzzy(object):
 
   def __str__(self):
     return "{}({})".format(self.nome, self.parametros)
+  
+ 
+class Composicao(ConjuntoNebuloso):
+  def __init__(self, nome, conjuntos):
+    super(Composicao, self).__init__(nome, None, None)
+    self.conjuntos = conjuntos
+    self.ponto_medio = np.max([k.ponto_medio for k in self.conjuntos])
+    if nome is None:
+      self.nome = str(self)
+  
+  def pertinencia(self, x):
+    pertinencias = [conjunto.pertinencia(x) for conjunto in self.conjuntos]
+    return np.max(pertinencias)
+    
+  def __str__(self):
+    ret = ""
+    for c in self.conjuntos:
+      if len(ret) > 1: ret += " OU "
+        ret += c.nome
+    return ret
+
+  
+class Conjuncao(ConjuntoNebuloso):
+  def __init__(self, conjuntos):
+    super(Conjuncao, self).__init__(None, None, None)
+    self.conjuntos = conjuntos
+    self.ponto_medio = np.min([k.ponto_medio for k in self.conjuntos])
+    if self.nome is None:
+      self.nome = str(self)
+        
+  def pertinencia(self, x):
+    pertinencias = [conjunto.pertinencia(x) for conjunto in self.conjuntos]
+    return np.min(pertinencias)
+    
+  def __str__(self):
+    ret = ""
+    for c in self.conjuntos:
+      if len(ret) > 1: ret += " E "
+        ret += c.nome
+    return ret
 
 
 def plot_conjuntos(ax, conjuntos, intervalo):
