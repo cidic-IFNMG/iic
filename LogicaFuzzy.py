@@ -36,7 +36,7 @@ class ConjuntoFuzzy(object):
  
 class Composicao(ConjuntoFuzzy):
   def __init__(self, nome, conjuntos):
-    super(Composicao, self).__init__(nome, None, None)
+    super(Composicao, self).__init__(nome, None, None, None)
     self.conjuntos = conjuntos
     self.ponto_medio = np.max([k.ponto_medio for k in self.conjuntos])
     if nome is None:
@@ -55,8 +55,8 @@ class Composicao(ConjuntoFuzzy):
 
   
 class Conjuncao(ConjuntoFuzzy):
-  def __init__(self, conjuntos):
-    super(Conjuncao, self).__init__(None, None, None)
+  def __init__(self, nome, conjuntos):
+    super(Conjuncao, self).__init__(nome, None, None, None)
     self.conjuntos = conjuntos
     self.ponto_medio = np.min([k.ponto_medio for k in self.conjuntos])
     if self.nome is None:
