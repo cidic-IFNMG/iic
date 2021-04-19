@@ -34,7 +34,7 @@ class ConjuntoFuzzy(object):
     return "{}({})".format(self.nome, self.parametros)
   
  
-class Composicao(ConjuntoNebuloso):
+class Composicao(ConjuntoFuzzy):
   def __init__(self, nome, conjuntos):
     super(Composicao, self).__init__(nome, None, None)
     self.conjuntos = conjuntos
@@ -54,7 +54,7 @@ class Composicao(ConjuntoNebuloso):
     return ret
 
   
-class Conjuncao(ConjuntoNebuloso):
+class Conjuncao(ConjuntoFuzzy):
   def __init__(self, conjuntos):
     super(Conjuncao, self).__init__(None, None, None)
     self.conjuntos = conjuntos
