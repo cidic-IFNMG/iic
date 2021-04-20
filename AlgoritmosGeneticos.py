@@ -1,5 +1,15 @@
 from copy import deepcopy
 
+class Individuo(object):
+
+  def __init__(self):
+    self.cromossomos = []
+    self.fitness = 0.0
+
+  def __str__(self):
+    return str(self.cromossomos)
+
+
 class AlgoritmoGenetico(object):
 
   # Método construtor
