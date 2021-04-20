@@ -118,7 +118,8 @@ class AlgoritmoGenetico(object):
       if imprimir:
         print("Geração:",self.geracoes," Aptidão:", fmelhor)
 
-      nova_populacao = [deepcopy(k) for ct, k in enumerate(self.historico_melhores) if ct < self.elitismo_quantidade]
+      ## ELITISMO
+      nova_populacao = [deepcopy(k) for k in self.historico_melhores[-self.elitismo_quantidade:]]
 
       ## SELEÇÃO
 
