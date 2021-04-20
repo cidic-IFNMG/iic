@@ -86,7 +86,7 @@ class AlgoritmoGenetico(object):
 
     self.melhor = self.populacao[np.random.randint(self.populacao_tamanho)]
 
-    self.melhor.fitness = self.avaliar(melhor)
+    self.melhor.fitness = self.avaliar(self.melhor)
 
     #Loop principal
 
