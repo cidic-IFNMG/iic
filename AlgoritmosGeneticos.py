@@ -1,19 +1,5 @@
-import numpy as np
-import pandas as pd
 from copy import deepcopy
 
-class Individuo(object):
-  
-  def __init__(self):
-    self.cromossomos = []
-    self.fitness = 0.0
-
-  def __str__(self):
-    return str(self.cromossomos)
-  
-  from copy import deepcopy
-
-# Classe que implementa o algoritmo genérico
 class AlgoritmoGenetico(object):
 
   # Método construtor
@@ -27,6 +13,9 @@ class AlgoritmoGenetico(object):
 
     # a quantidade de vezes que o ciclo evolutivo será repetido
     self.quantidade_geracoes = kwargs.get('quantidade_geracoes', 500)
+
+    # quantos dos melhores da população serão novamente inseridos
+    self.elitismo_quantidade = kwargs.get('elitismo_quantidade', 5)
 
     # % da população que será selecionada para a próxima geração
     self.taxa_selecao = kwargs.get('taxa_selecao', .5)
@@ -49,6 +38,9 @@ class AlgoritmoGenetico(object):
     # a população é uma lista(array) de indivíduos
     self.populacao = [] 
 
+    self.melhor = None
+    self.historico_melhores = []
+
   def criar_populacao_inicial(self):
     pass
 
@@ -66,7 +58,7 @@ class AlgoritmoGenetico(object):
 
   def gerar_estatisticas(self):
     fitness = [k.fitness for k in self.populacao]
-    melhor = np.min(fitness)
+    melhor = self.melhor.fitness
     media = np.median(fitness)
     pior = np.max(fitness)
     return melhor, media, pior
@@ -80,9 +72,9 @@ class AlgoritmoGenetico(object):
 
     geracoes = 0
 
-    melhor = self.populacao[np.random.randint(self.populacao_tamanho)]
+    self.melhor = self.populacao[np.random.randint(self.populacao_tamanho)]
 
-    melhor.fitness = self.avaliar(melhor)
+    self.melhor.fitness = self.avaliar(melhor)
 
     #Loop principal
 
@@ -93,8 +85,10 @@ class AlgoritmoGenetico(object):
       ## AVALIAÇÃO
       for individuo in self.populacao:
         individuo.fitness = self.avaliar(individuo)
-        if melhor.fitness >= individuo.fitness:
-          melhor = deepcopy(individuo)
+        if individuo.fitness < self.melhor.fitness:
+          print(self.melhor.fitness, individuo.fitness)
+          self.melhor = deepcopy(individuo)
+          self.historico_melhores.append(self.melhor)
 
       self.populacao = sorted(self.populacao, key=lambda k: k.fitness)
       self.populacao = self.populacao[:self.populacao_tamanho]
@@ -107,7 +101,7 @@ class AlgoritmoGenetico(object):
       if imprimir:
         print("Geração:",geracoes," Aptidão:", fmelhor)
 
-      nova_populacao = [deepcopy(melhor)]
+      nova_populacao = [deepcopy(k) for ct, k in enumerate(self.historico_melhores) if ct < self.elitismo_quantidade]
 
       ## SELEÇÃO
 
@@ -143,4 +137,4 @@ class AlgoritmoGenetico(object):
       self.populacao = nova_populacao
       
     
-    return melhor, historico
+    return self.melhor, historico
