@@ -52,6 +52,8 @@ class AlgoritmoGenetico(object):
 
     self.melhor = None
     self.historico_melhores = []
+    
+    self.geracoes = 0
 
   def criar_populacao_inicial(self):
     pass
@@ -66,6 +68,9 @@ class AlgoritmoGenetico(object):
     pass
 
   def mutar(self, individuo):
+    pass
+  
+  def atualizar_parametros(self):
     pass
 
   def gerar_estatisticas(self):
@@ -82,7 +87,7 @@ class AlgoritmoGenetico(object):
 
     historico = {'melhor': [], 'media': [], 'pior': []}
 
-    geracoes = 0
+    self.geracoes = 0
 
     self.melhor = self.populacao[np.random.randint(self.populacao_tamanho)]
 
@@ -90,9 +95,9 @@ class AlgoritmoGenetico(object):
 
     #Loop principal
 
-    while geracoes < self.quantidade_geracoes:
+    while self.geracoes < self.quantidade_geracoes:
 
-      geracoes += 1
+      self.geracoes += 1
 
       ## AVALIAÇÃO
       for individuo in self.populacao:
@@ -111,7 +116,7 @@ class AlgoritmoGenetico(object):
       historico['pior'].append(fpior)
 
       if imprimir:
-        print("Geração:",geracoes," Aptidão:", fmelhor)
+        print("Geração:",self.geracoes," Aptidão:", fmelhor)
 
       nova_populacao = [deepcopy(k) for ct, k in enumerate(self.historico_melhores) if ct < self.elitismo_quantidade]
 
@@ -147,6 +152,8 @@ class AlgoritmoGenetico(object):
         nova_populacao[ indice ] = individuo
 
       self.populacao = nova_populacao
+      
+      self.atualizar_parametros()
       
     
     return self.melhor, historico
