@@ -138,18 +138,18 @@ def inducao(dados, X,Y,conjuntos):
   return regras
 
 
-def formata_regras(regras, X, Y):
+def formata_regras(regras, X, Y, conjuntos):
   for precedente, consequente in regras.items():
     regra = "SE "
     for ct, x in enumerate(X):
       if ct > 0:
         regra += " E "
-      regra += "{} = {}".format(x, precedente[ct])
+      regra += "{} = {}".format(x, conjuntos[x][precedente[ct]])
     regra += " ENTÃO {} = ".format(Y)
     for ct, conjunto in enumerate(consequente.keys()):
       if ct > 0:
         regra += " + "
-      regra +=  "{}({})".format(conjunto, round(consequente[conjunto],2))
+      regra +=  "{}({})".format(conjuntos[Y][conjunto], round(consequente[conjunto],2))
     print(regra)
 
 
