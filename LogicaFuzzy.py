@@ -144,12 +144,12 @@ def formata_regras(regras, X, Y, conjuntos):
     for ct, x in enumerate(X):
       if ct > 0:
         regra += " E "
-      regra += "{} = {}".format(x, conjuntos[x][precedente[ct]])
+      regra += "{} = {}".format(x, conjuntos[x][precedente[ct]].nome)
     regra += " ENTÃO {} = ".format(Y)
     for ct, conjunto in enumerate(consequente.keys()):
       if ct > 0:
         regra += " + "
-      regra +=  "{}({})".format(conjuntos[Y][conjunto], round(consequente[conjunto],2))
+      regra +=  "{}({})".format(conjuntos[Y][conjunto].nome, round(consequente[conjunto],2))
     print(regra)
 
 
